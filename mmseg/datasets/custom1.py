@@ -68,11 +68,8 @@ class CustomDataset(Dataset):
     """
 
     CLASSES = ('background', 'building')
+
     PALETTE = [[0, 0, 0], [255, 255, 255]]
-
-    # CLASSES = ('background', 'building')
-    # PALETTE = [0, 1]
-
 
     def __init__(self,
                  pipeline,
@@ -93,7 +90,6 @@ class CustomDataset(Dataset):
         ann_dir = "C:/_koray/korhun/mmsegmentation/data/space/ann"
         img_suffix = '_rgb.jpg'
         seg_map_suffix = '_map.jpg'
-        split = None
 
 
         self.pipeline = Compose(pipeline)

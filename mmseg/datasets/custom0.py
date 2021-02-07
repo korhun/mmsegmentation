@@ -67,12 +67,9 @@ class CustomDataset(Dataset):
             Default: None
     """
 
-    CLASSES = ('background', 'building')
-    PALETTE = [[0, 0, 0], [255, 255, 255]]
+    CLASSES = None
 
-    # CLASSES = ('background', 'building')
-    # PALETTE = [0, 1]
-
+    PALETTE = None
 
     def __init__(self,
                  pipeline,
@@ -87,15 +84,6 @@ class CustomDataset(Dataset):
                  reduce_zero_label=False,
                  classes=None,
                  palette=None):
-
-        data_root = "C:/_koray/korhun/mmsegmentation/data/space"
-        img_dir = "C:/_koray/korhun/mmsegmentation/data/space/img"
-        ann_dir = "C:/_koray/korhun/mmsegmentation/data/space/ann"
-        img_suffix = '_rgb.jpg'
-        seg_map_suffix = '_map.jpg'
-        split = None
-
-
         self.pipeline = Compose(pipeline)
         self.img_dir = img_dir
         self.img_suffix = img_suffix
@@ -240,7 +228,6 @@ class CustomDataset(Dataset):
         pass
 
     def get_gt_seg_maps(self, efficient_test=False):
-        efficient_test = True#############################################
         """Get ground truth segmentation maps for evaluation."""
         gt_seg_maps = []
         for img_info in self.img_infos:
@@ -334,7 +321,7 @@ class CustomDataset(Dataset):
         Returns:
             dict[str, float]: Default metrics.
         """
-        efficient_test = True  #############################################
+
         if isinstance(metric, str):
             metric = [metric]
         allowed_metrics = ['mIoU', 'mDice']
