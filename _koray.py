@@ -87,13 +87,14 @@ def enumerate_files(dir_path, recursive=False, wildcard_pattern=None, case_insen
 # checkpoint_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_1/latest.pth"
 # checkpoint_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_2/latest.pth"
 
-
-# config_file = "C:/_koray/korhun/mmsegmentation/configs/deeplabv3plus/deeplabv3plus_r50-d8_512x1024_80k_cityscapes_koray_3.py"
-# checkpoint_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_3/latest.pth"
-
 ###ok
-config_file = "C:/_koray/korhun/mmsegmentation/configs/deeplabv3plus/deeplabv3plus_r50-d8_512x1024_80k_cityscapes_koray.py"
-checkpoint_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_2/latest.pth"
+# config_file = "C:/_koray/korhun/mmsegmentation/configs/deeplabv3plus/deeplabv3plus_r50-d8_512x1024_80k_cityscapes_koray.py"
+# checkpoint_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_2/latest.pth"
+
+
+config_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_pspnet_koray/pspnet_koray.py"
+checkpoint_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_pspnet_koray/latest.pth"
+
 
 
 # #
@@ -146,14 +147,17 @@ def display(is_img, img_or_fn, results, wait=1, window_name="Netcad-NDU Segmenta
 model = init_segmentor(config_file, checkpoint_file, device='cuda:0')
 
 
-for frame in ScreenCapturer(bbox=(200, 200, 200+1200, 200+1000)).get_frames():
-    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-    result = inference_segmentor(model, frame)
-    # model.show_result(frame, result, show=True, wait_time=1)
-    display(True, frame, result)
+
+##########screen capture
+# for frame in ScreenCapturer(bbox=(200, 200, 200+1200, 200+1000)).get_frames():
+#     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+#     result = inference_segmentor(model, frame)
+#     # model.show_result(frame, result, show=True, wait_time=1)
+#     display(True, frame, result)
 
 
 
+##########youtube
 # url = "https://youtu.be/ZORzsubQA_M"
 # for frame in YoutubeVideoSource(url).get_frames():
 #     result = inference_segmentor(model, frame)
@@ -161,12 +165,16 @@ for frame in ScreenCapturer(bbox=(200, 200, 200+1200, 200+1000)).get_frames():
 #     # display(True, frame, result)
 
 
-# for img in enumerate_files("C:/_koray/test_data/space/test"):
-for img_fn in enumerate_files("C:/_koray/test_datasssssssssssssssssssss/space/test/val"):
-    result = inference_segmentor(model, img_fn)
-    # model.show_result(img_fn, result, show=True, wait_time=1000)
-    display(False, img_fn, result, wait=1000)
+##########images
+# # for img in enumerate_files("C:/_koray/test_data/space/test"):
+# for img_fn in enumerate_files("C:/_koray/test_data/space/test/val"):
+#     result = inference_segmentor(model, img_fn)
+#     # model.show_result(img_fn, result, show=True, wait_time=1000)
+#     display(False, img_fn, result, wait=1000)
 
+
+
+##########video
 # video = mmcv.VideoReader('C:/_koray/test_data/driving.mp4')
 # video = mmcv.VideoReader('C:/_koray/test_data/highway/highway_1600.mp4')
 video = mmcv.VideoReader('C:/_koray/test_data/aerial/mexico.mp4')
@@ -174,11 +182,15 @@ video = mmcv.VideoReader('C:/_koray/test_data/aerial/mexico.mp4')
 # video = mmcv.VideoReader('C:/_koray/test_data/aerial/china.mp4')
 # video = mmcv.VideoReader('C:/_koray/test_data/aerial/barcelona.mp4')
 # video = mmcv.VideoReader('C:/_koray/test_data/çanakkale0/meydan2.mp4')
-
 for frame in video:
     result = inference_segmentor(model, frame)
     model.show_result(frame, result, show=True, wait_time=1)
     # display(True, frame, result)
+
+
+
+
+
 
 # python tools/train.py ${CONFIG_FILE} [optional arguments]
 # python tools/train.py

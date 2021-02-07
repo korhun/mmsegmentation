@@ -70,10 +70,6 @@ class CustomDataset(Dataset):
     CLASSES = ('background', 'building')
     PALETTE = [[0, 0, 0], [255, 255, 255]]
 
-    # CLASSES = ('background', 'building')
-    # PALETTE = [0, 1]
-
-
     def __init__(self,
                  pipeline,
                  img_dir,

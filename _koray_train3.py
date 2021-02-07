@@ -35,14 +35,21 @@ from mmseg.utils import collect_env, get_root_logger
 # ####################
 
 def get_cfg():
-    # args_config = "C:/_koray/korhun/mmsegmentation/configs/deeplabv3plus/deeplabv3plus_r50-d8_512x1024_80k_cityscapes_koray.py"
-    args_config = "C:/_koray/korhun/mmsegmentation/configs/deeplabv3plus/deeplabv3plus_r50-d8_512x1024_80k_cityscapes_koray_3.py"
+    #OK args_config = "C:/_koray/korhun/mmsegmentation/configs/deeplabv3plus/deeplabv3plus_r50-d8_512x1024_80k_cityscapes_koray.py"
+
+    # args_config = "C:/_koray/korhun/mmsegmentation/configs/deeplabv3plus/deeplabv3plus_r50-d8_512x1024_80k_cityscapes_koray_3.py"
+
     # args_config = "C:/_koray/korhun/mmsegmentation/configs/pspnet/pspnet_r50-d8_512x1024_40k_cityscapes.py"
     # args_config = "C:/_koray/korhun/mmsegmentation/configs/pspnet/pspnet_koray.py"
+    args_config = "C:/_koray/korhun/mmsegmentation/configs/ocrnet/ocrnet_hr18_512x1024_160k_cityscapes_koray.py"
+
+
     if not os.path.isfile(args_config):
         print("File does not exists: " + args_config)
         exit(1)
     cfg = Config.fromfile(args_config)
+    print(f'Config:\n{cfg.pretty_text}')
+
     return cfg
 
 
@@ -54,12 +61,19 @@ def create_dir(dir_name, parents=True, exist_ok=True):
 def main():
     # args = parse_args()
 
-    args_work_dir = "C:/_koray/korhun/mmsegmentation/data/space/work_dir"
+    # config_name = "koray_train3"
+    # config_name = "pspnet_koray"
+    config_name = "ocrnet_hr18_512x1024_160k_cityscapes_koray"
+
+    args_work_dir = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_"+config_name
+
+    args_resume_from = os.path.join(args_work_dir, "latest.pth")
+    if not os.path.isfile(args_resume_from):
+        args_resume_from = None
     args_launcher = "none"
     args_seed = None
     args_deterministic = False
     args_no_validate = False
-    config_name = "koray_train3"
 
     if not os.path.isdir(args_work_dir):
         create_dir(args_work_dir)
@@ -77,8 +91,8 @@ def main():
 
     # if args.load_from is not None:
     #     cfg.load_from = args.load_from
-    # if args.resume_from is not None:
-    #     cfg.resume_from = args.resume_from
+    if args_resume_from is not None:
+        cfg.resume_from = args_resume_from
     # if args.gpu_ids is not None:
     #     cfg.gpu_ids = args.gpu_ids
     # else:
