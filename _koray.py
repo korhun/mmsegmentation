@@ -52,67 +52,17 @@ def enumerate_files(dir_path, recursive=False, wildcard_pattern=None, case_insen
 
 # https://github.com/korhun/mmsegmentation/tree/master/configs/
 
-# config_file = 'configs/pspnet/pspnet_r50-d8_512x1024_40k_cityscapes.py'
-# checkpoint_file = 'checkpoints/pspnet_r50b-d8_512x1024_80k_cityscapes_20201225_094315-6344287a.pth'
-
-
-# config_file = 'configs/hrnet/fcn_hr48_512x1024_160k_cityscapes.py'
-# checkpoint_file = 'checkpoints/fcn_hr48_512x1024_160k_cityscapes_20200602_190946-59b7973e.pth'
-
-# config_file = 'configs/hrnet/fcn_hr48_480x480_80k_pascal_context.py'
-# checkpoint_file = 'checkpoints/fcn_hr48_480x480_80k_pascal_context_20200911_155322-847a6711.pth'
-
-
-# config_file = 'configs/ocrnet/ocrnet_hr48_512x512_40k_voc12aug.py'
-# checkpoint_file = 'checkpoints/ocrnet_hr48_512x512_40k_voc12aug_20200614_015958-255bc5ce.pth'
-
-# config_file = 'configs/ocrnet/ocrnet_hr48_512x512_160k_ade20k.py'
-# checkpoint_file = 'checkpoints/ocrnet_hr48_512x512_160k_ade20k_20200615_184705-a073726d.pth'
-
-#
-# # config_file = 'configs/ocrnet/ocrnet_hr48_512x1024_40k_cityscapes.py'
-# # checkpoint_file = 'checkpoints/ocrnet_hr48_512x1024_40k_cityscapes_20200601_033336-55b32491.pth'
-#
-#
-#
-
-
-# config_file = 'configs/ocrnet/ocrnet_hr48_512x1024_160k_cityscapes.py'
-# checkpoint_file = 'checkpoints/ocrnet_hr48_512x1024_160k_cityscapes_20200602_191037-dfbf1b0c.pth'
-
-
-# config_file = "C:/_koray/korhun/mmsegmentation/configs/deeplabv3plus/deeplabv3plus_r50-d8_512x1024_80k_cityscapes_koray_deneme.py"
-# config_file = "C:/_koray/korhun/mmsegmentation/configs/deeplabv3plus/deeplabv3plus_r50-d8_512x1024_80k_cityscapes_koray.py"
-# checkpoint_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir/latest.pth"
-# checkpoint_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_1/latest.pth"
-# checkpoint_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_2/latest.pth"
-
 ###ok
 # config_file = "C:/_koray/korhun/mmsegmentation/configs/deeplabv3plus/deeplabv3plus_r50-d8_512x1024_80k_cityscapes_koray.py"
 # checkpoint_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_2/latest.pth"
 
+# ###ok
+# config_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_pspnet_koray/pspnet_koray.py"
+# checkpoint_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_pspnet_koray/latest.pth"
 
-config_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_pspnet_koray/pspnet_koray.py"
-checkpoint_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_pspnet_koray/latest.pth"
+config_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_ocrnet_hr18_512x1024_160k_cityscapes_koray/ocrnet_hr18_512x1024_160k_cityscapes_koray.py"
+checkpoint_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_ocrnet_hr18_512x1024_160k_cityscapes_koray/latest.pth"
 
-
-
-# #
-#
-# config_file = 'configs/ocrnet/ocrnet_r101-d8_512x1024_80k_b16_cityscapes.py'
-# checkpoint_file = 'checkpoints/ocrnet_r101-d8_512x1024_80k_b16_cityscapes-78688424.pth'
-
-
-# config_file = 'C:/_koray/korhun/mmsegmentation/configs/unet/pspnet_unet_s5-d16_256x256_40k_hrf.py'
-# checkpoint_file = 'C:/_koray/test_data/space/aws/spacenet-6/2-MaksimovKA/sp_6__2_MaksimovKA.pth'
-
-
-# config_file = 'configs/deeplabv3plus/deeplabv3plus_r101b-d8_769x769_80k_cityscapes.py'
-# checkpoint_file = 'checkpoints/deeplabv3plus_r101b-d8_769x769_80k_cityscapes_20201226_205041-227cdf7c.pth'
-
-
-# config_file = 'configs/emanet/emanet_r101-d8_512x1024_80k_cityscapes.py'
-# checkpoint_file = 'checkpoints/emanet_r101-d8_512x1024_80k_cityscapes_20200901_100301-2d970745.pth'
 
 
 def display(is_img, img_or_fn, results, wait=1, window_name="Netcad-NDU Segmentation Test"):
@@ -148,12 +98,12 @@ model = init_segmentor(config_file, checkpoint_file, device='cuda:0')
 
 
 
-##########screen capture
-# for frame in ScreenCapturer(bbox=(200, 200, 200+1200, 200+1000)).get_frames():
-#     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-#     result = inference_segmentor(model, frame)
-#     # model.show_result(frame, result, show=True, wait_time=1)
-#     display(True, frame, result)
+#########screen capture
+for frame in ScreenCapturer(bbox=(200, 200, 200+1200, 200+1000)).get_frames():
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    result = inference_segmentor(model, frame)
+    # model.show_result(frame, result, show=True, wait_time=1)
+    display(True, frame, result)
 
 
 
@@ -165,7 +115,7 @@ model = init_segmentor(config_file, checkpoint_file, device='cuda:0')
 #     # display(True, frame, result)
 
 
-##########images
+# #########images
 # # for img in enumerate_files("C:/_koray/test_data/space/test"):
 # for img_fn in enumerate_files("C:/_koray/test_data/space/test/val"):
 #     result = inference_segmentor(model, img_fn)

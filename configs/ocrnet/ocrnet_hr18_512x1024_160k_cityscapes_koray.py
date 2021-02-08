@@ -64,7 +64,7 @@ model = dict(
     ],
     train_cfg=dict(),
     test_cfg=dict(mode='whole'))
-dataset_type = 'CityscapesDataset'
+dataset_type = 'CustomDataset'
 data_root = 'data/cityscapes/'
 img_norm_cfg = dict(
     mean=[123.675, 116.28, 103.53], std=[58.395, 57.12, 57.375], to_rgb=True)
@@ -107,7 +107,7 @@ data = dict(
     samples_per_gpu=2,
     workers_per_gpu=2,
     train=dict(
-        type='CityscapesDataset',
+        type='CustomDataset',
         data_root='data/cityscapes/',
         img_dir='leftImg8bit/train',
         ann_dir='gtFine/train',
@@ -129,7 +129,7 @@ data = dict(
             dict(type='Collect', keys=['img', 'gt_semantic_seg'])
         ]),
     val=dict(
-        type='CityscapesDataset',
+        type='CustomDataset',
         data_root='data/cityscapes/',
         img_dir='leftImg8bit/val',
         ann_dir='gtFine/val',
@@ -152,7 +152,7 @@ data = dict(
                 ])
         ]),
     test=dict(
-        type='CityscapesDataset',
+        type='CustomDataset',
         data_root='data/cityscapes/',
         img_dir='leftImg8bit/val',
         ann_dir='gtFine/val',
