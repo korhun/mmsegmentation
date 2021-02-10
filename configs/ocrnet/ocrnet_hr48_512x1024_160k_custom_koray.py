@@ -2,7 +2,7 @@ norm_cfg = dict(type='BN', requires_grad=True)
 model = dict(
     type='CascadeEncoderDecoder',
     num_stages=2,
-    pretrained='open-mmlab://msra/hrnetv2_w18',
+    pretrained='open-mmlab://msra/hrnetv2_w48',
     backbone=dict(
         type='HRNet',
         norm_cfg=dict(type='BN', requires_grad=True),
@@ -19,45 +19,45 @@ model = dict(
                 num_branches=2,
                 block='BASIC',
                 num_blocks=(4, 4),
-                num_channels=(18, 36)),
+                num_channels=(48, 96)),
             stage3=dict(
                 num_modules=4,
                 num_branches=3,
                 block='BASIC',
                 num_blocks=(4, 4, 4),
-                num_channels=(18, 36, 72)),
+                num_channels=(48, 96, 192)),
             stage4=dict(
                 num_modules=3,
                 num_branches=4,
                 block='BASIC',
                 num_blocks=(4, 4, 4, 4),
-                num_channels=(18, 36, 72, 144)))),
+                num_channels=(48, 96, 192, 384)))),
     decode_head=[
         dict(
             type='FCNHead',
-            in_channels=[18, 36, 72, 144],
-            channels=270,
-            in_index=(0, 1, 2, 3),
+            in_channels=[48, 96, 192, 384],
+            channels=720,
             input_transform='resize_concat',
+            in_index=(0, 1, 2, 3),
             kernel_size=1,
             num_convs=1,
+            norm_cfg=dict(type='BN', requires_grad=True),
             concat_input=False,
             dropout_ratio=-1,
             num_classes=2,
-            norm_cfg=dict(type='BN', requires_grad=True),
             align_corners=False,
             loss_decode=dict(
                 type='CrossEntropyLoss', use_sigmoid=False, loss_weight=0.4)),
         dict(
             type='OCRHead',
-            in_channels=[18, 36, 72, 144],
-            in_index=(0, 1, 2, 3),
-            input_transform='resize_concat',
+            in_channels=[48, 96, 192, 384],
             channels=512,
             ocr_channels=256,
+            input_transform='resize_concat',
+            in_index=(0, 1, 2, 3),
+            norm_cfg=dict(type='BN', requires_grad=True),
             dropout_ratio=-1,
             num_classes=2,
-            norm_cfg=dict(type='BN', requires_grad=True),
             align_corners=False,
             loss_decode=dict(
                 type='CrossEntropyLoss', use_sigmoid=False, loss_weight=1.0))
@@ -104,8 +104,8 @@ test_pipeline = [
         ])
 ]
 data = dict(
-    samples_per_gpu=2,
-    workers_per_gpu=2,
+    samples_per_gpu=1,
+    workers_per_gpu=1,
     train=dict(
         type='CustomDataset',
         data_root='data/cityscapes/',
@@ -186,5 +186,6 @@ optimizer = dict(type='SGD', lr=0.01, momentum=0.9, weight_decay=0.0005)
 optimizer_config = dict()
 lr_config = dict(policy='poly', power=0.9, min_lr=0.0001, by_epoch=False)
 runner = dict(type='IterBasedRunner', max_iters=160000)
-checkpoint_config = dict(by_epoch=False, interval=16000)
+# checkpoint_config = dict(by_epoch=False, interval=16000)
+checkpoint_config = dict(by_epoch=False, interval=4000)
 evaluation = dict(interval=16000, metric='mIoU')

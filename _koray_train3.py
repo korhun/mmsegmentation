@@ -41,7 +41,10 @@ def get_cfg():
 
     # args_config = "C:/_koray/korhun/mmsegmentation/configs/pspnet/pspnet_r50-d8_512x1024_40k_cityscapes.py"
     # args_config = "C:/_koray/korhun/mmsegmentation/configs/pspnet/pspnet_koray.py"
+    # args_config = "C:/_koray/korhun/mmsegmentation/configs/ocrnet/ocrnet_hr18_512x1024_160k_cityscapes_koray.py"
+
     args_config = "C:/_koray/korhun/mmsegmentation/configs/ocrnet/ocrnet_hr18_512x1024_160k_cityscapes_koray.py"
+    # args_config = "C:/_koray/korhun/mmsegmentation/configs/ocrnet/ocrnet_hr48_512x1024_160k_custom_koray.py"
 
 
     if not os.path.isfile(args_config):
@@ -63,9 +66,13 @@ def main():
 
     # config_name = "koray_train3"
     # config_name = "pspnet_koray"
-    config_name = "ocrnet_hr18_512x1024_160k_cityscapes_koray"
+    # config_name = "ocrnet_hr18_512x1024_160k_cityscapes_koray"
 
-    args_work_dir = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_"+config_name
+    config_name = "ocrnet_hr48_512x1024_160k_custom_koray"
+    # dataset_name = "SV3_roads"
+    dataset_name = "SN7_buildings"
+
+    args_work_dir = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_"+config_name+"_"+dataset_name
 
     args_resume_from = os.path.join(args_work_dir, "latest.pth")
     if not os.path.isfile(args_resume_from):
