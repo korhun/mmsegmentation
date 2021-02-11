@@ -82,14 +82,20 @@ def put_text(img, text_, center, color=None, font_scale=0.5, thickness=1, back_c
 # config_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_ocrnet_hr18_512x1024_160k_cityscapes_koray/ocrnet_hr18_512x1024_160k_cityscapes_koray.py"
 # checkpoint_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_ocrnet_hr18_512x1024_160k_cityscapes_koray/latest.pth"
 
-# # global, iyi çalışmadı
-# config_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_ocrnet_hr18_512x1024_160k_cityscapes_koray_global/ocrnet_hr18_512x1024_160k_cityscapes_koray_global.py"
-# checkpoint_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_ocrnet_hr18_512x1024_160k_cityscapes_koray_global/latest.pth"
-
 
 # # # yollar
 # config_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_ocrnet_hr48_512x1024_160k_custom_koray_SV3_roads/ocrnet_hr48_512x1024_160k_custom_koray.py"
 # checkpoint_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_ocrnet_hr48_512x1024_160k_custom_koray_SV3_roads/latest.pth"
+
+
+# # SN7_buildings 18
+# config_file = "C:/_koray/korhun/mmsegmentation/data/space/SN7_buildings_ocrnet_hr18_512x1024_160k_cityscapes_koray/ocrnet_hr18_512x1024_160k_cityscapes_koray.py"
+# checkpoint_file = "C:/_koray/korhun/mmsegmentation/data/space/SN7_buildings_ocrnet_hr18_512x1024_160k_cityscapes_koray/latest.pth"
+
+# SN7_buildings 48
+config_file = "C:/_koray/korhun/mmsegmentation/data/space/SN7_buildings_ocrnet_hr48_512x1024_160k_custom_koray/ocrnet_hr48_512x1024_160k_custom_koray.py"
+checkpoint_file = "C:/_koray/korhun/mmsegmentation/data/space/SN7_buildings_ocrnet_hr48_512x1024_160k_custom_koray/latest.pth"
+
 
 
 _display_inited = False
@@ -104,18 +110,20 @@ def display(is_img, img_or_fn, results, wait=1, window_name="Netcad-NDU Segmenta
         img0 = cv2.imread(img_or_fn)
 
     img = img0.astype(np.int32)
-    palette = [None, [0, 255, 255]]
+
+    # palette = [None, [0, 255, 255]]
+    # for label, color in enumerate(palette):
+    #     if color is not None:
+    #         img[res == label, :] = color
+    # img = img0 * 0.5 + img * 0.5
+
+    palette = [[0,0,0], [0, 255, 255]]
     for label, color in enumerate(palette):
-        # color_seg[result == label, :] = color
         if color is not None:
             img[res == label, :] = color
+    img = img0 * 0.5 + img * 1.5
 
-    # # convert to BGR
-    # color_seg = color_seg[..., ::-1]
 
-    # img = img0 * 0.5 + color_seg * 0.5
-    # img = img0 + color_seg
-    img = img0 * 0.5 + img * 0.5
     img = img.astype(np.uint8)
 
     non_zero = np.count_nonzero(res)
@@ -149,9 +157,9 @@ for frame in ScreenCapturer(bbox=(400, 200, 400 + 1200, 200 + 1000)).get_frames(
 
 
 #########images
-# for img in enumerate_files("C:/_koray/test_data/space/test"):
+for img_fn in enumerate_files("C:/_koray/test_data/space/test"):
 # for img_fn in enumerate_files("C:/_koray/test_data/space/test/val"):
-for img_fn in enumerate_files("C:/_koray/train_datasets/spacenet/mm/building/global/rgb"):
+# for img_fn in enumerate_files("C:/_koray/train_datasets/spacenet/mm/building/global/rgb"):
     result = inference_segmentor(model, img_fn)
     # model.show_result(img_fn, result, show=True, wait_time=1000)
     display(False, img_fn, result, wait=1000)

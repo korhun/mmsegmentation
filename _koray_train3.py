@@ -1,3 +1,5 @@
+from typing import Tuple, AnyStr
+
 import argparse
 import copy
 import os
@@ -34,8 +36,18 @@ from mmseg.utils import collect_env, get_root_logger
 #
 # ####################
 
+def get_file_name_extension(file_full_name) -> Tuple[AnyStr, AnyStr, AnyStr]:
+    dir_name, file_name = os.path.split(file_full_name)
+    name, extension = os.path.splitext(file_name)
+    return dir_name, name, extension
+
+
+def path_join(a: AnyStr, *paths: AnyStr) -> AnyStr:
+    return os.path.join(a, *paths).replace("/", os.path.sep)
+
+
 def get_cfg():
-    #OK args_config = "C:/_koray/korhun/mmsegmentation/configs/deeplabv3plus/deeplabv3plus_r50-d8_512x1024_80k_cityscapes_koray.py"
+    # OK args_config = "C:/_koray/korhun/mmsegmentation/configs/deeplabv3plus/deeplabv3plus_r50-d8_512x1024_80k_cityscapes_koray.py"
 
     # args_config = "C:/_koray/korhun/mmsegmentation/configs/deeplabv3plus/deeplabv3plus_r50-d8_512x1024_80k_cityscapes_koray_3.py"
 
@@ -43,9 +55,8 @@ def get_cfg():
     # args_config = "C:/_koray/korhun/mmsegmentation/configs/pspnet/pspnet_koray.py"
     # args_config = "C:/_koray/korhun/mmsegmentation/configs/ocrnet/ocrnet_hr18_512x1024_160k_cityscapes_koray.py"
 
-    args_config = "C:/_koray/korhun/mmsegmentation/configs/ocrnet/ocrnet_hr18_512x1024_160k_cityscapes_koray.py"
-    # args_config = "C:/_koray/korhun/mmsegmentation/configs/ocrnet/ocrnet_hr48_512x1024_160k_custom_koray.py"
-
+    # args_config = "C:/_koray/korhun/mmsegmentation/configs/ocrnet/ocrnet_hr18_512x1024_160k_cityscapes_koray.py"
+    args_config = "C:/_koray/korhun/mmsegmentation/configs/ocrnet/ocrnet_hr48_512x1024_160k_custom_koray.py"
 
     if not os.path.isfile(args_config):
         print("File does not exists: " + args_config)
@@ -53,7 +64,7 @@ def get_cfg():
     cfg = Config.fromfile(args_config)
     print(f'Config:\n{cfg.pretty_text}')
 
-    return cfg
+    return cfg, args_config
 
 
 def create_dir(dir_name, parents=True, exist_ok=True):
@@ -62,19 +73,15 @@ def create_dir(dir_name, parents=True, exist_ok=True):
 
 
 def main():
-    # args = parse_args()
+    cfg, config_fn = get_cfg()
+    _, config_name, _ = get_file_name_extension(config_fn)
 
-    # config_name = "koray_train3"
-    # config_name = "pspnet_koray"
-    # config_name = "ocrnet_hr18_512x1024_160k_cityscapes_koray"
-
-    config_name = "ocrnet_hr48_512x1024_160k_custom_koray"
     # dataset_name = "SV3_roads"
     dataset_name = "SN7_buildings"
 
-    args_work_dir = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_"+config_name+"_"+dataset_name
+    args_work_dir = path_join("C:/_koray/korhun/mmsegmentation/data/space", dataset_name + "_" + config_name)
 
-    args_resume_from = os.path.join(args_work_dir, "latest.pth")
+    args_resume_from = path_join(args_work_dir, "latest.pth")
     if not os.path.isfile(args_resume_from):
         args_resume_from = None
     args_launcher = "none"
@@ -86,7 +93,7 @@ def main():
         create_dir(args_work_dir)
 
     # cfg = Config.fromfile(args_config)
-    cfg = get_cfg()
+
     # if args.options is not None:
     #     cfg.merge_from_dict(args.options)
 
