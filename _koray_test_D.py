@@ -8,9 +8,6 @@ from typing import AnyStr
 # # Check Pytorch installation
 import torch, torchvision
 
-from screen_capturer import ScreenCapturer
-from youtube import YoutubeVideoSource
-
 print(torch.__version__, torch.cuda.is_available())
 # conda install pytorch torchvision torchaudio cudatoolkit=11.0 -c pytorch
 # python -c "import torch, torchvision; print(torch.__version__, torch.cuda.is_available())"
@@ -70,33 +67,33 @@ def put_text(img, text_, center, color=None, font_scale=0.5, thickness=1, back_c
 # https://github.com/korhun/mmsegmentation/tree/master/configs/
 
 ###ok
-# config_file = "C:/_koray/korhun/mmsegmentation/configs/deeplabv3plus/deeplabv3plus_r50-d8_512x1024_80k_cityscapes_koray.py"
-# checkpoint_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_2/latest.pth"
+# config_file = "D:/_koray/korhun/mmsegmentation/configs/deeplabv3plus/deeplabv3plus_r50-d8_512x1024_80k_cityscapes_koray.py"
+# checkpoint_file = "D:/_koray/korhun/mmsegmentation/data/space/work_dir_2/latest.pth"
 
 # ###ok rotterdam
-# config_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_pspnet_koray/pspnet_koray.py"
-# checkpoint_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_pspnet_koray/latest.pth"
+# config_file = "D:/_koray/korhun/mmsegmentation/data/space/work_dir_pspnet_koray/pspnet_koray.py"
+# checkpoint_file = "D:/_koray/korhun/mmsegmentation/data/space/work_dir_pspnet_koray/latest.pth"
 
 # # ###ok ++  Bakü
-# config_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_ocrnet_hr18_512x1024_160k_cityscapes_koray/ocrnet_hr18_512x1024_160k_cityscapes_koray.py"
-# checkpoint_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_ocrnet_hr18_512x1024_160k_cityscapes_koray/latest.pth"
+# config_file = "D:/_koray/korhun/mmsegmentation/data/space/work_dir_ocrnet_hr18_512x1024_160k_cityscapes_koray/ocrnet_hr18_512x1024_160k_cityscapes_koray.py"
+# checkpoint_file = "D:/_koray/korhun/mmsegmentation/data/space/work_dir_ocrnet_hr18_512x1024_160k_cityscapes_koray/latest.pth"
 
 
 # # # yollar
-# config_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_ocrnet_hr48_512x1024_160k_custom_koray_SV3_roads/ocrnet_hr48_512x1024_160k_custom_koray.py"
-# checkpoint_file = "C:/_koray/korhun/mmsegmentation/data/space/work_dir_ocrnet_hr48_512x1024_160k_custom_koray_SV3_roads/latest.pth"
+# config_file = "D:/_koray/korhun/mmsegmentation/data/space/work_dir_ocrnet_hr48_512x1024_160k_custom_koray_SV3_roads/ocrnet_hr48_512x1024_160k_custom_koray.py"
+# checkpoint_file = "D:/_koray/korhun/mmsegmentation/data/space/work_dir_ocrnet_hr48_512x1024_160k_custom_koray_SV3_roads/latest.pth"
 
 
 # # SN7_buildings 18
-# config_file = "C:/_koray/korhun/mmsegmentation/data/space/SN7_buildings_ocrnet_hr18_512x1024_160k_cityscapes_koray/ocrnet_hr18_512x1024_160k_cityscapes_koray.py"
-# checkpoint_file = "C:/_koray/korhun/mmsegmentation/data/space/SN7_buildings_ocrnet_hr18_512x1024_160k_cityscapes_koray/latest.pth"
+# config_file = "D:/_koray/korhun/mmsegmentation/data/space/SN7_buildings_ocrnet_hr18_512x1024_160k_cityscapes_koray/ocrnet_hr18_512x1024_160k_cityscapes_koray.py"
+# checkpoint_file = "D:/_koray/korhun/mmsegmentation/data/space/SN7_buildings_ocrnet_hr18_512x1024_160k_cityscapes_koray/latest.pth"
 
 # # SN7_buildings 48
-# config_file = "C:/_koray/korhun/mmsegmentation/data/space/SN7_buildings_ocrnet_hr48_512x1024_160k_custom_koray/ocrnet_hr48_512x1024_160k_custom_koray.py"
-# checkpoint_file = "C:/_koray/korhun/mmsegmentation/data/space/SN7_buildings_ocrnet_hr48_512x1024_160k_custom_koray/latest.pth"
+# config_file = "D:/_koray/korhun/mmsegmentation/data/space/SN7_buildings_ocrnet_hr48_512x1024_160k_custom_koray/ocrnet_hr48_512x1024_160k_custom_koray.py"
+# checkpoint_file = "D:/_koray/korhun/mmsegmentation/data/space/SN7_buildings_ocrnet_hr48_512x1024_160k_custom_koray/latest.pth"
 # SN7_buildings 48
-config_file = "C:/_koray/train_datasets/space/weights/SN7_buildings/ocrnet_hr48_512x1024_160k/ocrnet_hr48_512x1024_160k_custom_koray.py"
-checkpoint_file = "C:/_koray/train_datasets/space/weights/SN7_buildings/ocrnet_hr48_512x1024_160k/iter_148000.pth"
+config_file = "D:/_koray/train_datasets/space/weights/SN7_buildings/ocrnet_hr48_512x1024_160k/ocrnet_hr48_512x1024_160k_custom_koray.py"
+checkpoint_file = "D:/_koray/train_datasets/space/weights/SN7_buildings/ocrnet_hr48_512x1024_160k/iter_148000.pth"
 
 
 
@@ -147,8 +144,8 @@ model = init_segmentor(config_file, checkpoint_file, device='cuda:0')
 
 
 #########tiff
-# for img_fn in enumerate_files("C:/_koray/test_data/space/test"):
-for img_fn in enumerate_files("C:/_koray/test_data/space/SN7_buildings_test_public/test_public/L15-0369E-1244N_1479_3214_13/images_masked"):
+# for img_fn in enumerate_files("D:/_koray/test_data/space/test"):
+for img_fn in enumerate_files("D:/_koray/test_data/space/SN7_buildings_test_public/test_public/L15-0369E-1244N_1479_3214_13/images_masked"):
 
 
     # tiff = tiff_helper.open_tiff(img_fn)
@@ -178,21 +175,21 @@ for img_fn in enumerate_files("C:/_koray/test_data/space/SN7_buildings_test_publ
 
 #
 # #########images
-# for img_fn in enumerate_files("C:/_koray/test_data/space/test"):
-# # for img_fn in enumerate_files("C:/_koray/test_data/space/test/val"):
-# # for img_fn in enumerate_files("C:/_koray/train_datasets/spacenet/mm/building/global/rgb"):
+# for img_fn in enumerate_files("D:/_koray/test_data/space/test"):
+# # for img_fn in enumerate_files("D:/_koray/test_data/space/test/val"):
+# # for img_fn in enumerate_files("D:/_koray/train_datasets/spacenet/mm/building/global/rgb"):
 #     result = inference_segmentor(model, img_fn)
 #     # model.show_result(img_fn, result, show=True, wait_time=1000)
 #     display(False, img_fn, result, wait=1000)
 
 ##########video
-# video = mmcv.VideoReader('C:/_koray/test_data/driving.mp4')
-# video = mmcv.VideoReader('C:/_koray/test_data/highway/highway_1600.mp4')
-video = mmcv.VideoReader('C:/_koray/test_data/aerial/mexico2.mp4')
-# video = mmcv.VideoReader('C:/_koray/test_data/aerial/japan.mp4')
-# video = mmcv.VideoReader('C:/_koray/test_data/aerial/china.mp4')
-# video = mmcv.VideoReader('C:/_koray/test_data/aerial/barcelona.mp4')
-# video = mmcv.VideoReader('C:/_koray/test_data/çanakkale0/meydan2.mp4')
+# video = mmcv.VideoReader('D:/_koray/test_data/driving.mp4')
+# video = mmcv.VideoReader('D:/_koray/test_data/highway/highway_1600.mp4')
+video = mmcv.VideoReader('D:/_koray/test_data/aerial/mexico.mp4')
+# video = mmcv.VideoReader('D:/_koray/test_data/aerial/japan.mp4')
+# video = mmcv.VideoReader('D:/_koray/test_data/aerial/china.mp4')
+# video = mmcv.VideoReader('D:/_koray/test_data/aerial/barcelona.mp4')
+# video = mmcv.VideoReader('D:/_koray/test_data/çanakkale0/meydan2.mp4')
 for frame in video:
     result = inference_segmentor(model, frame)
     model.show_result(frame, result, show=True, wait_time=1)

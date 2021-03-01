@@ -14,6 +14,7 @@ from PIL import Image
 # pip uninstall mmcv-full --yes
 # git clone https://github.com/open-mmlab/mmcv.git
 # cd C:\_koray\git\mmcv
+# https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=BuildTools&rel=16
 # set MMCV_WITH_OPS=1
 # pip install -e .
 # cd C:\_koray\korhun\mmsegmentation

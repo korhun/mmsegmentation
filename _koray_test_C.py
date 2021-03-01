@@ -8,9 +8,6 @@ from typing import AnyStr
 # # Check Pytorch installation
 import torch, torchvision
 
-from screen_capturer import ScreenCapturer
-from youtube import YoutubeVideoSource
-
 print(torch.__version__, torch.cuda.is_available())
 # conda install pytorch torchvision torchaudio cudatoolkit=11.0 -c pytorch
 # python -c "import torch, torchvision; print(torch.__version__, torch.cuda.is_available())"
@@ -188,7 +185,7 @@ for img_fn in enumerate_files("C:/_koray/test_data/space/SN7_buildings_test_publ
 ##########video
 # video = mmcv.VideoReader('C:/_koray/test_data/driving.mp4')
 # video = mmcv.VideoReader('C:/_koray/test_data/highway/highway_1600.mp4')
-video = mmcv.VideoReader('C:/_koray/test_data/aerial/mexico2.mp4')
+video = mmcv.VideoReader('C:/_koray/test_data/aerial/mexico.mp4')
 # video = mmcv.VideoReader('C:/_koray/test_data/aerial/japan.mp4')
 # video = mmcv.VideoReader('C:/_koray/test_data/aerial/china.mp4')
 # video = mmcv.VideoReader('C:/_koray/test_data/aerial/barcelona.mp4')
